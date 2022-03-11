@@ -1,26 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from "react";
+import "./styles/App.scss";
+import { ColorList } from "./components/ColorList";
+import { useState } from "react";
+import { ColorType } from "./components/types/ColorTypes";
+import { ErrorType } from "./components/types/ErrorTypes";
+import { AddColorForm } from "./components/AddColorForm";
+import { ColorErrors } from "./components/constants/ColorErrors";
+import { Alert } from "./components/Alert";
 
-function App() {
+const App = () => {
+  useEffect(() => {
+    document.title = `Color App`;
+  }, []);
+
+  type Colors = ColorType[]
+  type Errors = ErrorType[]
+
+  
+  const [colors, setColors] = useState<Colors>([])
+  const [errors, setErrors] = useState<Errors>(ColorErrors)
+
+ useEffect(() => {
+  const storedColors = localStorage.getItem("colors")
+  if(storedColors) setColors(JSON.parse(storedColors))
+}, [])
+
+
+  useEffect(() => {
+    localStorage.setItem("colors", JSON.stringify(colors))
+  },[colors])
+
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {errors.map((error, index) => error.active == true && <Alert key={index} message={error.message}/>)}
+      <AddColorForm setColors={setColors} setErrors={setErrors} errors={errors}/>
+      {/* <ColorFilter /> */}
+      <ColorList colors={colors} setColors={setColors}/>
     </div>
   );
-}
+};
 
 export default App;

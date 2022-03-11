@@ -1,0 +1,14 @@
+.alert {
+  padding: 10px 50px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  &--info {
+    color: #144083;
+    background-color: #cfe2ff;
+  }
+  &--warning {
+    color: #000000;
+    background-color: #e07f10;
+  }
+  
+}
