@@ -1,6 +1,6 @@
 import { SetStateAction } from "react";
+import { Component } from "react";
 import { Dispatch } from "react";
-import { FC } from "react";
 import { defaultColors } from "./constants/DefaultColors";
 import { DefaultColorsList } from "./DefaultColorsList";
 import { ColorType } from "./types/ColorTypes";
@@ -14,11 +14,13 @@ type ColorsProps = {
   filteredColors: ColorType[]
 }
 
-export const ColorList: FC<ColorsProps> = ({colors, setColors, filteredColors}) => {
-  return (
-    <div className="color-list">
+export class ColorList extends Component<ColorsProps>  {
+  render() {
+    return (
+      <div className="color-list">
       <DefaultColorsList defaultColors={defaultColors} />
-      <UserColorsList colors={colors} setColors={setColors} filteredColors={filteredColors}/>
+      <UserColorsList colors={this.props.colors} setColors={this.props.setColors} filteredColors={this.props.filteredColors}/>
     </div>
-  );
+    )
+  }
 };
