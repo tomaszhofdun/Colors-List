@@ -10,14 +10,15 @@ type ColorsTable = ColorType[];
 
 type ColorsProps = {
   colors: ColorType[],
-  setColors: Dispatch<SetStateAction<ColorsTable>>;
+  setColors: Dispatch<SetStateAction<ColorsTable>>,
+  filteredColors: ColorType[]
 }
 
-export const ColorList: FC<ColorsProps> = ({colors, setColors}) => {
+export const ColorList: FC<ColorsProps> = ({colors, setColors, filteredColors}) => {
   return (
     <div className="color-list">
-      <DefaultColorsList  defaultColors={defaultColors} />
-      <UserColorsList colors={colors} setColors={setColors} />
+      <DefaultColorsList defaultColors={defaultColors} />
+      <UserColorsList colors={colors} setColors={setColors} filteredColors={filteredColors}/>
     </div>
   );
 };

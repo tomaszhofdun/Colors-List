@@ -31,7 +31,7 @@ export const hexToHsl = (hex: string): HSL => {
     s: number,
     l: number = (max + min) / 2;
 
-  if (max == min) {
+  if (max === min) {
     h = s = 0; // achromatic
   } else {
     var d = max - min;
@@ -65,3 +65,6 @@ export const hexToHsl = (hex: string): HSL => {
 export const hexValidate = (hex: string): boolean => {
   return /#{1}([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.test(hex);
 };
+
+
+
